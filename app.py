@@ -1,34 +1,22 @@
 import streamlit as st
 
-# Imports de los algoritmos
-# (Los imports de cada algoritmo deberían ir dentro de su respectiva función para evitar conflictos de nombres)
-# ...
-
-# Función que ejecuta el algoritmo genético
-def algoritmo_genetico():
-    # Aquí iría todo el código relacionado al algoritmo genético
-
-# Función que ejecuta el recocido simulado
-def recocido_simulado():
-    # Aquí iría todo el código relacionado al recocido simulado
-
-# Aquí agregarías más funciones si tienes otros algoritmos...
-
-# Interfaz principal
 def main():
-    st.title("Optimización de Cosecha")
+    st.title('Selección de Algoritmo')
 
-    # Seleccionar el algoritmo
-    algoritmo = st.selectbox("Elige un algoritmo:", 
-                             ["Algoritmo Genético", "Recocido Simulado", "... otros algoritmos ..."])
+    algoritmos = {
+        'Algoritmo Genético': 'codigo1.py',
+        'Recocido Simulado': 'codigo2.py',
+        'Enjambre de Partículas (PSO)': 'codigo3.py',
+        'Programación Lineal': 'codigo4.py'
+    }
 
-    # Botón de ejecución
-    if st.button("Ejecutar"):
-        if algoritmo == "Algoritmo Genético":
-            algoritmo_genetico()
-        elif algoritmo == "Recocido Simulado":
-            recocido_simulado()
-        # ... y así para otros algoritmos ...
+    seleccion = st.selectbox('Elige un algoritmo:', list(algoritmos.keys()))
 
-if __name__ == "__main__":
+    if st.button('Ejecutar Algoritmo'):
+        with open(algoritmos[seleccion], 'r') as file:
+            exec(file.read())
+        st.experimental_rerun()  # Para refrescar la app una vez que finalice el algoritmo
+
+if __name__ == '__main__':
     main()
+
